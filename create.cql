@@ -31,8 +31,8 @@ CREATE TABLE ingredients_by_recipe (
     fat_per_unit decimal,
     calories_per_unit decimal,
     carbs_per_unit decimal,
-    price decimal, // eventuell entfernen, aufgrund häufigen Aktuisierungsbedarfes
-    amount_in_stock decimal, // eventuell entfernen, aufgrund häufigen Aktuisierungsbedarfes (sehr akut)
+    price decimal, // eventuell entfernen, aufgrund häufigen Aktualisierungsbedarfes
+    amount_in_stock decimal, // eventuell entfernen, aufgrund häufigen Aktualisierungsbedarfes (sehr akut)
     PRIMARY KEY (recipe_id, ingredient_id)
 );
 

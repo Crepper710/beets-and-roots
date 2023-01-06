@@ -31,8 +31,8 @@ CREATE TABLE ingredients_by_recipe (
     fat_per_unit decimal,
     calories_per_unit decimal,
     carbs_per_unit decimal,
-    price decimal, // eventuell entfernen, aufgrund häufigen Aktualisierungsbedarfes
-    amount_in_stock decimal, // eventuell entfernen, aufgrund häufigen Aktualisierungsbedarfes (sehr akut)
+    price decimal, // eventuell entfernen, aufgrund häufigen Aktuisierungsbedarfes
+    amount_in_stock decimal, // eventuell entfernen, aufgrund häufigen Aktuisierungsbedarfes (sehr akut)
     PRIMARY KEY (recipe_id, ingredient_id)
 );
 
@@ -43,12 +43,27 @@ CREATE INDEX ON ingredients_by_recipe (ingredient_id);
 // tabelle für die Metadaten der Rezepte erstellen
 CREATE TABLE metadata_by_recipe (
     recipe_id text,
-    categories set<text>,
-    restrictions set<text>,
+	// cat_* und no_* nur auf "true" abfragen!!!!!
+	// cat_* = kategorie
+    cat_cool_food boolean,
+	cat_tasty boolean,
+	cat_not_so_tasty boolean,
+	// no_* = beschränkung
+    no_egg boolean,
+	no_milk boolean,
+	no_soy boolean,
+	no_water boolean,
     PRIMARY KEY (recipe_id)
 );
 
+// neue kategorie oder beschränkung hinzufügen über "ALTER TABLE metadata_by_recipe ADD <name> boolean" und anschließend "CREATE INDEX ON metadata_by_recipe <name>"
+
 // ermöglicht das filtern anhand von Kategorien
-CREATE INDEX ON metadata_by_recipe (categories);
+CREATE INDEX ON metadata_by_recipe (cat_cool_food);
+CREATE INDEX ON metadata_by_recipe (cat_tasty);
+CREATE INDEX ON metadata_by_recipe (cat_not_so_tasty);
 // ermöglicht das filtern anhand von Beschränkungen
-CREATE INDEX ON metadata_by_recipe (restrictions);
+CREATE INDEX ON metadata_by_recipe (no_egg);
+CREATE INDEX ON metadata_by_recipe (no_milk);
+CREATE INDEX ON metadata_by_recipe (no_soy);
+CREATE INDEX ON metadata_by_recipe (no_water);
